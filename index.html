@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人介绍</title>
+    <title>灵动启动页面</title>
     <style>
         * {
             margin: 0;
@@ -13,219 +13,358 @@
         }
         
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
         }
         
         .container {
-            max-width: 800px;
-            width: 100%;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            padding: 40px 30px;
+            max-width: 900px;
+            width: 90%;
             text-align: center;
+            z-index: 2;
+            position: relative;
         }
         
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
+        .logo {
+            margin-bottom: 40px;
+            animation: pulse 3s infinite alternate;
         }
         
-        .avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            object-fit: cover;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
         }
         
-        h1 {
-            font-size: 2.2rem;
+        .logo h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 10px;
-            font-weight: 600;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        .title {
+        .logo p {
             font-size: 1.2rem;
             opacity: 0.9;
             font-weight: 300;
         }
         
-        .content {
-            padding: 30px;
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 25px 20px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            gap: 25px;
-        }
-        
-        .section {
-            margin-bottom: 10px;
-        }
-        
-        h2 {
-            color: #2575fc;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        p {
-            margin-bottom: 15px;
-            font-size: 1.05rem;
-            color: #555;
-        }
-        
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .skill {
-            background: #eef4ff;
-            color: #2575fc;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .contact {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 10px;
-        }
-        
-        .contact-item {
-            display: flex;
             align-items: center;
-            gap: 8px;
-            color: #555;
-            text-decoration: none;
-            transition: color 0.3s;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
         
-        .contact-item:hover {
-            color: #2575fc;
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            z-index: -1;
+            transition: opacity 0.4s;
         }
         
-        footer {
-            background: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            color: #777;
+        .btn:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(-5px) scale(1.01);
+        }
+        
+        .btn i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            transition: transform 0.4s;
+        }
+        
+        .btn:hover i {
+            transform: scale(1.2) rotate(10deg);
+        }
+        
+        .btn span {
             font-size: 0.9rem;
-            border-top: 1px solid #eee;
+            opacity: 0.8;
+            margin-top: 8px;
+            font-weight: 300;
         }
         
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 8px;
+        /* 不同按钮的独特样式 */
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.7) 0%, rgba(37, 117, 252, 0.7) 100%);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, rgba(255, 87, 34, 0.7) 0%, rgba(251, 192, 45, 0.7) 100%);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, rgba(0, 150, 136, 0.7) 0%, rgba(0, 188, 212, 0.7) 100%);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.7) 0%, rgba(233, 30, 99, 0.7) 100%);
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, rgba(3, 169, 244, 0.7) 0%, rgba(0, 229, 255, 0.7) 100%);
+        }
+        
+        .btn-light {
+            background: linear-gradient(135deg, rgba(96, 125, 139, 0.7) 0%, rgba(176, 190, 197, 0.7) 100%);
+        }
+        
+        /* 按钮点击波纹效果 */
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(50, 50);
+                opacity: 0;
+            }
+        }
+        
+        /* 底部波浪装饰 */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.1)"></path></svg>');
+            background-size: 1200px 100px;
+            animation: wave 12s linear infinite;
+            z-index: 1;
+        }
+        
+        .wave:nth-child(2) {
+            bottom: 10px;
+            animation: wave 10s linear infinite;
+            opacity: 0.5;
+            background-size: 1100px 100px;
+        }
+        
+        @keyframes wave {
+            0% {
+                background-position-x: 0;
+            }
+            100% {
+                background-position-x: 1200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2.5rem;
             }
             
-            header {
-                padding: 30px 20px;
+            .buttons-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
-            .avatar {
-                width: 120px;
-                height: 120px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .content {
-                padding: 20px;
+            .btn {
+                padding: 20px 15px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="wave"></div>
+    <div class="wave"></div>
+    
     <div class="container">
-        <header>
-            <div class="profile-container">
-                <img src="Image_1759065479849.jpg" alt="个人头像" class="avatar">
-                <h1>张明</h1>
-                <div class="title">前端开发工程师</div>
-            </div>
-        </header>
-        
-        <div class="content">
-            <div class="section">
-                <h2>关于我</h2>
-                <p>你好！我是一名充满热情的前端开发工程师，拥有5年的Web开发经验。我热爱创造美观、实用且用户友好的界面，致力于通过代码解决实际问题。</p>
-                <p>在我的职业生涯中，我参与了多个大型项目的开发，从概念设计到最终实现，积累了丰富的全栈开发经验。我相信持续学习和不断进步是保持竞争力的关键。</p>
-            </div>
-            
-            <div class="section">
-                <h2>专业技能</h2>
-                <div class="skills">
-                    <span class="skill">HTML5/CSS3</span>
-                    <span class="skill">JavaScript</span>
-                    <span class="skill">React</span>
-                    <span class="skill">Vue.js</span>
-                    <span class="skill">Node.js</span>
-                    <span class="skill">TypeScript</span>
-                    <span class="skill">响应式设计</span>
-                    <span class="skill">UI/UX设计</span>
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2>工作经历</h2>
-                <p><strong>高级前端工程师</strong> - 科技先锋公司 (2019年至今)</p>
-                <p>负责公司核心产品的前端架构设计和开发，带领5人团队完成多个重要项目，提升了产品性能和用户体验。</p>
-                
-                <p><strong>前端开发工程师</strong> - 创新科技 (2017-2019)</p>
-                <p>参与公司电商平台的前端开发，实现了响应式设计和移动端优化，使移动端用户转化率提升了30%。</p>
-            </div>
-            
-            <div class="section">
-                <h2>联系我</h2>
-                <div class="contact">
-                    <a href="mailto:zhangming@example.com" class="contact-item">
-                        <span>📧 zhangming@example.com</span>
-                    </a>
-                    <a href="tel:+8613800138000" class="contact-item">
-                        <span>📱 +86 138 0013 8000</span>
-                    </a>
-                    <a href="#" class="contact-item">
-                        <span>🔗 LinkedIn</span>
-                    </a>
-                    <a href="#" class="contact-item">
-                        <span>🐙 GitHub</span>
-                    </a>
-                </div>
-            </div>
+        <div class="logo">
+            <h1>灵动空间</h1>
+            <p>探索无限可能，点击开启旅程</p>
         </div>
         
-        <footer>
-            <p>© 2023 张明 - 个人介绍页面</p>
-        </footer>
+        <div class="buttons-grid">
+            <div class="btn btn-primary">
+                <i>🚀</i>
+                开始探索
+                <span>发现新世界</span>
+            </div>
+            
+            <div class="btn btn-secondary">
+                <i>🎮</i>
+                游戏中心
+                <span>畅玩精彩游戏</span>
+            </div>
+            
+            <div class="btn btn-success">
+                <i>📚</i>
+                知识库
+                <span>学习与成长</span>
+            </div>
+            
+            <div class="btn btn-warning">
+                <i>🎵</i>
+                音乐空间
+                <span>沉浸式体验</span>
+            </div>
+            
+            <div class="btn btn-info">
+                <i>🎨</i>
+                创意工坊
+                <span>释放创造力</span>
+            </div>
+            
+            <div class="btn btn-light">
+                <i>⚙️</i>
+                设置中心
+                <span>个性化配置</span>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // 创建粒子背景
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机大小
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // 随机位置
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100 + 100}%`;
+                
+                // 随机动画延迟和持续时间
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // 添加按钮点击效果
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // 创建点击波纹效果
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+                
+                // 获取点击位置
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // 设置波纹位置
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                // 移除波纹元素
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+                
+                // 这里可以添加按钮点击后的实际功能
+                console.log(`点击了: ${this.textContent.trim()}`);
+            });
+        });
+        
+        // 初始化粒子
+        createParticles();
+    </script>
 </body>
 </html>
