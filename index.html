@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>灵动启动页面</title>
+    <title>智能AI助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,358 +14,557 @@
         }
         
         body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px) rotate(360deg);
-                opacity: 0;
-            }
+            padding: 20px;
         }
         
         .container {
-            max-width: 900px;
-            width: 90%;
-            text-align: center;
-            z-index: 2;
-            position: relative;
+            max-width: 1200px;
+            width: 100%;
+            height: 85vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            overflow: hidden;
         }
         
-        .logo {
-            margin-bottom: 40px;
-            animation: pulse 3s infinite alternate;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(1.05);
-            }
-        }
-        
-        .logo h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .logo p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-        
-        .buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-        
-        .btn {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 25px 20px;
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #6a11cb 0%, #2575fc 100%);
             color: white;
-            font-size: 1.2rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow: hidden;
-            z-index: 1;
+            overflow-y: auto;
         }
         
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
-            z-index: -1;
-            transition: opacity 0.4s;
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
         }
         
-        .btn:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
         }
         
-        .btn:active {
-            transform: translateY(-5px) scale(1.01);
-        }
-        
-        .btn i {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            transition: transform 0.4s;
-        }
-        
-        .btn:hover i {
-            transform: scale(1.2) rotate(10deg);
-        }
-        
-        .btn span {
+        .logo p {
             font-size: 0.9rem;
             opacity: 0.8;
-            margin-top: 8px;
-            font-weight: 300;
         }
         
-        /* 不同按钮的独特样式 */
-        .btn-primary {
-            background: linear-gradient(135deg, rgba(106, 17, 203, 0.7) 0%, rgba(37, 117, 252, 0.7) 100%);
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        .btn-secondary {
-            background: linear-gradient(135deg, rgba(255, 87, 34, 0.7) 0%, rgba(251, 192, 45, 0.7) 100%);
-        }
-        
-        .btn-success {
-            background: linear-gradient(135deg, rgba(0, 150, 136, 0.7) 0%, rgba(0, 188, 212, 0.7) 100%);
-        }
-        
-        .btn-warning {
-            background: linear-gradient(135deg, rgba(156, 39, 176, 0.7) 0%, rgba(233, 30, 99, 0.7) 100%);
-        }
-        
-        .btn-info {
-            background: linear-gradient(135deg, rgba(3, 169, 244, 0.7) 0%, rgba(0, 229, 255, 0.7) 100%);
-        }
-        
-        .btn-light {
-            background: linear-gradient(135deg, rgba(96, 125, 139, 0.7) 0%, rgba(176, 190, 197, 0.7) 100%);
-        }
-        
-        /* 按钮点击波纹效果 */
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-        
-        .btn:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-        
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(50, 50);
-                opacity: 0;
-            }
-        }
-        
-        /* 底部波浪装饰 */
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
+        .ai-selector {
             width: 100%;
-            height: 100px;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.1)"></path></svg>');
-            background-size: 1200px 100px;
-            animation: wave 12s linear infinite;
-            z-index: 1;
+            margin-bottom: 30px;
         }
         
-        .wave:nth-child(2) {
-            bottom: 10px;
-            animation: wave 10s linear infinite;
-            opacity: 0.5;
-            background-size: 1100px 100px;
+        .ai-option {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            border: 2px solid transparent;
         }
         
-        @keyframes wave {
-            0% {
-                background-position-x: 0;
+        .ai-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .ai-option.active {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .ai-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .deepseek .ai-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .doubao .ai-icon {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        
+        .ai-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .ai-info p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .stats {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: auto;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .chat-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .current-ai {
+            display: flex;
+            align-items: center;
+        }
+        
+        .current-ai-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .current-ai-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .current-ai-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 15px 20px;
+            border-radius: 18px;
+            line-height: 1.5;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .ai-message {
+            align-self: flex-start;
+            background: #f0f4f8;
+            color: #333;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .ai-message .message-time {
+            text-align: left;
+        }
+        
+        .chat-input {
+            display: flex;
+            align-items: center;
+            background: #f5f7fa;
+            border-radius: 25px;
+            padding: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chat-input input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 15px 20px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .send-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .send-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .send-button:active {
+            transform: scale(0.95);
+        }
+        
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: #f0f4f8;
+            padding: 15px 20px;
+            border-radius: 18px;
+            border-bottom-left-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .typing-dots {
+            display: flex;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #999;
+            margin: 0 3px;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
             }
-            100% {
-                background-position-x: 1200px;
+            30% {
+                transform: translateY(-5px);
             }
         }
         
         @media (max-width: 768px) {
-            .logo h1 {
-                font-size: 2.5rem;
+            .container {
+                flex-direction: column;
+                height: auto;
+                min-height: 90vh;
             }
             
-            .buttons-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+            .sidebar {
+                width: 100%;
+                padding: 20px;
             }
             
-            .btn {
-                padding: 20px 15px;
+            .avatar {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .chat-container {
+                padding: 20px;
+            }
+            
+            .message {
+                max-width: 90%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
-    <div class="wave"></div>
-    <div class="wave"></div>
-    
     <div class="container">
-        <div class="logo">
-            <h1>灵动空间</h1>
-            <p>探索无限可能，点击开启旅程</p>
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1>智能AI助手</h1>
+                <p>您的智能对话伙伴</p>
+            </div>
+            
+            <img src="Image_1759065479849.jpg" alt="AI助手头像" class="avatar">
+            
+            <div class="ai-selector">
+                <div class="ai-option deepseek active" data-ai="deepseek">
+                    <div class="ai-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="ai-info">
+                        <h3>DeepSeek</h3>
+                        <p>深度思考，精准解答</p>
+                    </div>
+                </div>
+                
+                <div class="ai-option doubao" data-ai="doubao">
+                    <div class="ai-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="ai-info">
+                        <h3>豆包</h3>
+                        <p>创意无限，灵感迸发</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span>今日对话</span>
+                    <span>12次</span>
+                </div>
+                <div class="stat-item">
+                    <span>解决问题</span>
+                    <span>8个</span>
+                </div>
+                <div class="stat-item">
+                    <span>在线状态</span>
+                    <span>正常</span>
+                </div>
+            </div>
         </div>
         
-        <div class="buttons-grid">
-            <div class="btn btn-primary">
-                <i>🚀</i>
-                开始探索
-                <span>发现新世界</span>
+        <!-- 聊天区域 -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="current-ai">
+                    <div class="current-ai-icon deepseek">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="current-ai-info">
+                        <h2>DeepSeek</h2>
+                        <p>深度思考，精准解答 · 在线</p>
+                    </div>
+                </div>
             </div>
             
-            <div class="btn btn-secondary">
-                <i>🎮</i>
-                游戏中心
-                <span>畅玩精彩游戏</span>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai-message">
+                    您好！我是您的智能AI助手，可以选择DeepSeek或豆包来协助您解决问题。请问有什么可以帮您的吗？
+                    <div class="message-time">刚刚</div>
+                </div>
             </div>
             
-            <div class="btn btn-success">
-                <i>📚</i>
-                知识库
-                <span>学习与成长</span>
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
             </div>
             
-            <div class="btn btn-warning">
-                <i>🎵</i>
-                音乐空间
-                <span>沉浸式体验</span>
-            </div>
-            
-            <div class="btn btn-info">
-                <i>🎨</i>
-                创意工坊
-                <span>释放创造力</span>
-            </div>
-            
-            <div class="btn btn-light">
-                <i>⚙️</i>
-                设置中心
-                <span>个性化配置</span>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="输入您的问题，按回车发送...">
+                <button class="send-button" id="sendButton">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // 创建粒子背景
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chatMessages');
+            const userInput = document.getElementById('userInput');
+            const sendButton = document.getElementById('sendButton');
+            const typingIndicator = document.getElementById('typingIndicator');
+            const aiOptions = document.querySelectorAll('.ai-option');
+            const currentAiIcon = document.querySelector('.current-ai-icon');
+            const currentAiInfo = document.querySelector('.current-ai-info h2');
+            const currentAiDesc = document.querySelector('.current-ai-info p');
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // 随机大小
-                const size = Math.random() * 20 + 5;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // 随机位置
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100 + 100}%`;
-                
-                // 随机动画延迟和持续时间
-                particle.style.animationDelay = `${Math.random() * 15}s`;
-                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        // 添加按钮点击效果
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                // 创建点击波纹效果
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple');
-                this.appendChild(ripple);
-                
-                // 获取点击位置
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // 设置波纹位置
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
-                
-                // 移除波纹元素
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-                
-                // 这里可以添加按钮点击后的实际功能
-                console.log(`点击了: ${this.textContent.trim()}`);
+            let currentAI = 'deepseek';
+            
+            // AI切换功能
+            aiOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // 移除所有active类
+                    aiOptions.forEach(opt => opt.classList.remove('active'));
+                    // 添加active类到当前选项
+                    this.classList.add('active');
+                    
+                    // 更新当前AI
+                    currentAI = this.getAttribute('data-ai');
+                    
+                    // 更新顶部显示的AI信息
+                    if (currentAI === 'deepseek') {
+                        currentAiIcon.className = 'current-ai-icon deepseek';
+                        currentAiIcon.innerHTML = '<i class="fas fa-brain"></i>';
+                        currentAiInfo.textContent = 'DeepSeek';
+                        currentAiDesc.textContent = '深度思考，精准解答 · 在线';
+                    } else {
+                        currentAiIcon.className = 'current-ai-icon doubao';
+                        currentAiIcon.innerHTML = '<i class="fas fa-seedling"></i>';
+                        currentAiInfo.textContent = '豆包';
+                        currentAiDesc.textContent = '创意无限，灵感迸发 · 在线';
+                    }
+                    
+                    // 添加切换AI的提示消息
+                    addMessage(`${currentAI === 'deepseek' ? 'DeepSeek' : '豆包'}已就绪，请问有什么可以帮您的？`, 'ai');
+                });
             });
+            
+            // 发送消息函数
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message === '') return;
+                
+                // 添加用户消息
+                addMessage(message, 'user');
+                userInput.value = '';
+                
+                // 显示"正在输入"指示器
+                typingIndicator.style.display = 'block';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // 模拟AI回复（实际应用中这里应该调用API）
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    const aiResponse = generateAIResponse(message, currentAI);
+                    addMessage(aiResponse, 'ai');
+                }, 1500);
+            }
+            
+            // 添加消息到聊天区域
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}-message`;
+                
+                const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
+                messageDiv.innerHTML = `
+                    ${text}
+                    <div class="message-time">${time}</div>
+                `;
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // 生成AI回复（模拟）
+            function generateAIResponse(userMessage, aiModel) {
+                // 这里模拟AI的回复逻辑
+                // 实际应用中应该调用相应的API
+                
+                const responses = {
+                    deepseek: [
+                        "根据我的分析，您的问题可以从以下几个方面解决...",
+                        "这是一个很好的问题。从专业角度来看，我建议...",
+                        "基于现有数据和逻辑推理，我认为最佳方案是...",
+                        "这个问题涉及多个层面，让我为您详细解析...",
+                        "经过深度思考，我为您提供了以下解决方案..."
+                    ],
+                    doubao: [
+                        "哇，这个问题很有意思！让我用创意的方式为您解答...",
+                        "灵感来了！我觉得可以这样解决您的问题...",
+                        "从不同的角度来看，这个问题可以有多种有趣的解决方案...",
+                        "让我用一些新颖的思路来回答您的问题...",
+                        "这个问题激发了我的创造力！以下是我的建议..."
+                    ]
+                };
+                
+                const randomResponse = responses[aiModel][Math.floor(Math.random() * responses[aiModel].length)];
+                
+                // 根据用户问题内容生成更相关的回复
+                if (userMessage.toLowerCase().includes('你好') || userMessage.includes('您好')) {
+                    return `您好！我是${aiModel === 'deepseek' ? 'DeepSeek' : '豆包'}，很高兴为您服务！`;
+                } else if (userMessage.toLowerCase().includes('天气')) {
+                    return "我目前无法获取实时天气数据，但建议您查看专业天气应用获取最新信息。";
+                } else if (userMessage.toLowerCase().includes('时间')) {
+                    return `现在是 ${new Date().toLocaleString()}。`;
+                } else if (userMessage.toLowerCase().includes('帮助')) {
+                    return "我可以帮助您解答问题、提供建议、分析问题等。请随时告诉我您需要什么帮助！";
+                }
+                
+                return randomResponse;
+            }
+            
+            // 事件监听
+            sendButton.addEventListener('click', sendMessage);
+            
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // 初始聚焦到输入框
+            userInput.focus();
         });
-        
-        // 初始化粒子
-        createParticles();
     </script>
 </body>
 </html>
